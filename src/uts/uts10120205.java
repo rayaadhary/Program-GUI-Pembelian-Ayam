@@ -4,6 +4,8 @@
  */
 package uts;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author adhary
@@ -207,8 +209,14 @@ public class uts10120205 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+      try 
+      {
         // mendapatkan nama
+        if (txtNama.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Jangan lupa mengisi nama!");
+        }
+        else {
         String nama = txtNama.getText();
         txtOutput.append("Nama Pembeli\t\t"+nama+"\n");
         
@@ -282,12 +290,25 @@ public class uts10120205 extends javax.swing.JFrame {
             int jumlah2 = Integer.parseInt(txtJumlahSayap.getText());
             int jumlah3 = Integer.parseInt(txtJumlahPahaBawah.getText());
             int jumlah4 = Integer.parseInt(txtJumlahPahaAtas.getText());
+            int diskon = 0;
+            int diskon1 = 0;
+            int hargaDiskon = 0;
+            int hargaDiskon1 = 0;
             
             int totjum = jumlah1 + jumlah2;
             int totjum1 = jumlah3 + jumlah4;
-            if (totjum > 5 && totjum1 > 5) {
-                 potongan = (int) (subtotal*0.05) + (int) (subtotal*0.03);
+            
+            hargaDiskon = PahaAtas * jumlah4 + PahaBawah * jumlah3;
+            hargaDiskon1 = Ati * jumlah1 + Sayap * jumlah2;
+            
+            if (totjum > 5 ) {
+                  diskon = (int) (hargaDiskon*0.05);
             }
+            if (totjum1 > 5) {
+                 diskon1 = (int) (hargaDiskon1*0.03);
+            }
+            
+            potongan = diskon1 + diskon;
         }
         
         
@@ -313,6 +334,11 @@ public class uts10120205 extends javax.swing.JFrame {
        txtOutput.append("Biaya Pesan\t\tRp."+String.format("%,d", biayaPesan)+"\n");
        txtOutput.append("Pajak\t\tRp."+String.format("%,d", pajak)+"\n");
        txtOutput.append("Total Bayar\t\tRp."+String.format("%,d", totalBayar)+"\n");
+        }
+     }    
+      catch (NumberFormatException e) {
+          JOptionPane.showMessageDialog(null, "Nilai yang diinputkan harus berupa angka!");
+      }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
